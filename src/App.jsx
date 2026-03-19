@@ -3,35 +3,41 @@ import { useEffect, useState } from "react"
 function App() {
 
   const [user, setUser] = useState(null)
+  const [loginStarted, setLoginStarted] = useState(false)
 
   useEffect(() => {
 
-    function initAuth() {
+    async function initAuth() {
 
-      if (!window.catalyst) {
-        setTimeout(initAuth, 100)
-        return
-      }
+      if (!window.catalyst) return
 
-      window.catalyst.auth.getCurrentUser()
-        .then(user => {
-          setUser(user)
-        })
-        .catch(() => {
+      try {
+
+        const u = await window.catalyst.auth.getCurrentUser()
+        setUser(u)
+
+      } catch {
+
+        if (!loginStarted) {
+
+          setLoginStarted(true)
+
           window.catalyst.auth.signIn("login-container")
-        })
+
+        }
+
+      }
 
     }
 
     initAuth()
 
-  }, [])
+  }, [loginStarted])
 
   if (!user) {
 
     return (
       <div className="login-wrapper">
-
         <div className="login-card">
 
           <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
@@ -41,7 +47,6 @@ function App() {
           <div id="login-container"></div>
 
         </div>
-
       </div>
     )
 
