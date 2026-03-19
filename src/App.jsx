@@ -6,21 +6,20 @@ function App() {
 
   useEffect(() => {
 
-    async function initAuth() {
+    function initAuth() {
 
-      if (!window.catalyst) return
-
-      try {
-
-        const user = await window.catalyst.auth.getCurrentUser()
-
-        setUser(user)
-
-      } catch {
-
-        window.catalyst.auth.signIn("login-container")
-
+      if (!window.catalyst) {
+        setTimeout(initAuth, 100)
+        return
       }
+
+      window.catalyst.auth.getCurrentUser()
+        .then(user => {
+          setUser(user)
+        })
+        .catch(() => {
+          window.catalyst.auth.signIn("login-container")
+        })
 
     }
 
@@ -28,25 +27,25 @@ function App() {
 
   }, [])
 
-if (!user) {
+  if (!user) {
 
-  return (
-    <div className="login-wrapper">
+    return (
+      <div className="login-wrapper">
 
-      <div className="login-card">
+        <div className="login-card">
 
-        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-          Please login
-        </h2>
+          <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+            Please login
+          </h2>
 
-        <div id="login-container"></div>
+          <div id="login-container"></div>
+
+        </div>
 
       </div>
+    )
 
-    </div>
-  )
-
-}
+  }
 
   return (
 
