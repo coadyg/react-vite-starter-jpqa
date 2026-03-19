@@ -28,16 +28,25 @@ function App() {
 
   }, [])
 
-  if (!user) {
+if (!user) {
 
-    return (
-      <div style={{ textAlign: "center", paddingTop: "100px" }}>
-        <h2>Please login</h2>
+  return (
+    <div className="login-wrapper">
+
+      <div className="login-card">
+
+        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+          Please login
+        </h2>
+
         <div id="login-container"></div>
-      </div>
-    )
 
-  }
+      </div>
+
+    </div>
+  )
+
+}
 
   return (
 
