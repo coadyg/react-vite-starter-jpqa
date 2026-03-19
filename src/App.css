@@ -62,5 +62,5 @@
 /* Container where Catalyst injects the iframe */
 #login-container {
   width: 100%;
-  min-height: 480px;
+  min-height: 700px;
 }
