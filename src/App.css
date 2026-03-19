@@ -40,3 +40,27 @@
 .read-the-docs {
   color: #888;
 }
+/* Full screen login layout */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f5f7fa;
+}
+
+/* Login card */
+.login-card {
+  width: 420px;
+  min-height: 480px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 30px;
+}
+
+/* Container where Catalyst injects the iframe */
+#login-container {
+  width: 100%;
+  min-height: 420px;
+}
